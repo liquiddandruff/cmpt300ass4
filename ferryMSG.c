@@ -8,7 +8,13 @@
 #include <sys/ipc.h>
 #include <sys/msg.h>
 
+// Definitions used to control simulation termination
+#define DBG_AUTO_STOP_TIME 5000
 #define MIN_VEHICLE_ARRIVAL_INTERVAL 100
+
+// Definitions used for msging
+#define MSG_TYPE_CAR 1
+#define MSG_TYPE_TRUCK 2
 
 typedef struct mymsgbuf
 {
@@ -16,43 +22,64 @@ typedef struct mymsgbuf
 	int num;
 } mess_t;
 
+// We will use the same buffer format (and size) for each msg, no matter the queue 
+mess_t msg;
+int msgSize;
+
 int queueCaptainToVehicles;
 int queueCaptainToFerry;
 int queueVehiclesToCaptain;
 
-int parentProcessID = -1;
-int vehicleProcessGID = -1;
-int truckArrivalProb = 0;
-int maxTimeToNextArrival = 0;
+int mainProcessID;
+int vehicleCreationProcessPID;
+int vehicleProcessGID;
+int truckArrivalProb;
+int maxTimeToNextArrival;
 
 int timeChange( const struct timeval startTime );
 void init();
 void cleanup();
 
-void carProcess() {
+int carProcess() {
 	int localpid = getpid();
 	setpgid(localpid, vehicleProcessGID);
+	msg.mtype = MSG_TYPE_CAR;
+	// msgsnd sends a _copy_ of the msg to the queue, so no need to instantiate additional msgs
+	if(msgsnd(queueVehiclesToCaptain, &msg, msgSize, 0) != 0) {
+		return -1;
+	}
 
-	return;
+
+	return 0;
 }
 
-void truckProcess() {
+int truckProcess() {
 	int localpid = getpid();
 	setpgid(localpid, vehicleProcessGID);
+	msg.mtype = MSG_TYPE_TRUCK;
+	if(msgsnd(queueVehiclesToCaptain, &msg, msgSize, 0) != 0) {
+		return -1;
+	}
 
-	return;
+
+	return 0;
 }
 
-void vehicleCreationProcess() {
-	printf("vehicleCreation\n");
-    struct timeval startTime;   /* time at start of program execution */
-    int elapsed = 0;          /* time from start of program execution */
-    int lastArrivalTime = 0;    /* time from start of program execution */
-                              /* at which the last vehicle arrived */
+int captainProcess() {
 
-    printf("CREATECREATECREATECREATE       creation process \n");
-    
-    /*  Initialize start time */
+	return 0;
+}
+
+int vehicleCreationProcess() {
+	int localpid = getpid();
+	// Time at start of process creation
+    struct timeval startTime;
+	// Time from start of process creation to current time
+    int elapsed = 0;
+	// Time at which last vehicle arrived
+    int lastArrivalTime = 0;
+
+    printf("CREATECREATECREATECR   vehicleCreationProcess created with PID: %8d \n", localpid);
     gettimeofday(&startTime, NULL);
     elapsed = timeChange(startTime);
     srand (elapsed*1000+44);
@@ -66,31 +93,34 @@ void vehicleCreationProcess() {
 	
       elapsed = timeChange(startTime);
 	  if(elapsed >= lastArrivalTime) {
-		  printf("CREATECREATECREATECREATE      elapsed time %d arrival time %d\n", elapsed, lastArrivalTime); 
+		  printf("CREATECREATECREATECR   elapsed time %d arrival time %d\n", elapsed, lastArrivalTime); 
 		  if(lastArrivalTime > 0 ) { 
 			  if(rand() % 100 < truckArrivalProb ) {
 				  /* This is a truck */
-				  printf("CREATECREATECREATECREATE   ");
-				  printf("   Created a truck process\n");
-				  if(fork() == 0) {
-					  truckProcess();
-					  return;
+				  // If the fork fails for any reason, stop the simulation
+				  printf("CREATECREATECREATECR   Created a truck process\n");
+				  int childPID = fork(); 
+				  if(childPID == 0) {
+					  return truckProcess();
+				  } else if(childPID == -1) {
+					  return -1;
 				  }
 			  }
 			  else {
 				  /* This is a car */
-				  printf("CREATECREATECREATECREATE   ");
-				  printf("   Created a car process\n");
-				  if(fork() == 0) {
-					  carProcess();
-					  return;
+				  printf("CREATECREATECREATECR   Created a car process\n");
+				  int childPID = fork(); 
+				  if(childPID == 0) {
+					  return carProcess();
+				  } else if(childPID == -1) {
+					  return -1;
 				  }
 			  }
 		  }
 		  lastArrivalTime += rand()% maxTimeToNextArrival;
-		  printf("CREATECREATECREATECREATE   ");
-		  printf("   present time %d, next arrival time %d\n", elapsed, lastArrivalTime);
+		  printf("CREATECREATECREATECR   present time %d, next arrival time %d\n", elapsed, lastArrivalTime);
 	  }
+
 	  zombieTick++;
 	  // Purge all zombies every 10 iteratinos
 	  if(zombieTick % 10 == 0) {
@@ -102,16 +132,21 @@ void vehicleCreationProcess() {
 		  }
 	  }
 
+	  if(elapsed > DBG_AUTO_STOP_TIME)
+		  break;
     }
-    printf("CREATECREATECREATECREATE      EXITING FROM CREATE\n");
+
+    printf("CREATECREATECREATECR   EXITING FROM CREATE\n");
+	return 0;
 }
 
 int main() {
+	int status;
 	init();
 
     printf("Please enter integer values for the following variables\n");
 
-    /* timing of car and truck creation */
+	// Truck probability
 	printf("Enter the percent probability that the next vehicle is a truck (0..100): ");
 	scanf("%d", &truckArrivalProb);
 	while(truckArrivalProb < 0 || truckArrivalProb > 100) {
@@ -119,6 +154,7 @@ int main() {
 		scanf("%d", &truckArrivalProb);
 	}
 
+	// Vehicle interval
 	printf("Enter the maximum length of the interval between vehicles (%d..MAX_INT): ", MIN_VEHICLE_ARRIVAL_INTERVAL);
 	scanf("%d", &maxTimeToNextArrival);
 	while(maxTimeToNextArrival < MIN_VEHICLE_ARRIVAL_INTERVAL) {
@@ -126,11 +162,16 @@ int main() {
 		scanf("%d", &maxTimeToNextArrival);
 	}
 
-	if(fork() == 0) {
+	if((vehicleCreationProcessPID = fork()) == 0) {
 		vehicleCreationProcess();
 		return 0;
 	}
-	printf("parent\n");
+
+	// Wait for vehicleCreationProcess to finish
+    printf("ret: %d\n", waitpid(vehicleCreationProcessPID, &status, 0));
+	
+
+    printf("waited\n");
 
 	cleanup();
 
@@ -138,24 +179,28 @@ int main() {
 }
 
 void init() {
+	// The mtype is not sent with our msg, so exclude this from the size of each msg
+	// Additionally, we will use the same buffer format (and size) for each queue
+	msgSize = sizeof(mess_t) - sizeof(long);
 	key_t msgkey;
 	msgkey = ftok("ferryMSG.c",'v');
 	if((queueCaptainToVehicles = msgget(msgkey, IPC_CREAT | 0660)) == -1) {
-		printf("INITINITINITINITINIT failed to create queue queueCaptainToVehicles\n");
+		printf("INITINITINITINITINIT   failed to create queue queueCaptainToVehicles\n");
 		exit(1);
 	}
 	msgkey = ftok("ferryMSG.c.",'f');
 	if((queueCaptainToFerry = msgget(msgkey, IPC_CREAT | 0660)) == -1) {
-		printf("INITINITINITINITINIT failed to create queue queueCaptainToFerry\n");
+		printf("INITINITINITINITINIT   failed to create queue queueCaptainToFerry\n");
 		exit(1);
 	}
 	msgkey = ftok("ferryMSG.c.",'c');
 	if((queueVehiclesToCaptain = msgget(msgkey, IPC_CREAT | 0660)) == -1) {
-		printf("INITINITINITINITINIT failed to create queue queueVehiclesToCaptain\n");
+		printf("INITINITINITINITINIT   failed to create queue queueVehiclesToCaptain\n");
 		exit(1);
 	}
-	parentProcessID = getpid();
-	vehicleProcessGID = parentProcessID - 1;
+	printf("INITINITINITINITINIT   All queues successfully created\n");
+	mainProcessID = getpid();
+	vehicleProcessGID = mainProcessID - 1;
 }
 
 void cleanup() {
@@ -164,9 +209,9 @@ void cleanup() {
 	msgctl(queueVehiclesToCaptain, IPC_RMID, 0);
 
 	if(killpg(vehicleProcessGID, SIGKILL) == -1 && errno == EPERM) {
-		printf("XXCLEANUPCLEANUPCLEA   vehicles not killed\n");
+		printf("XXXCLEANUPCLEANUPCLE   vehicles not killed\n");
 	}
-	printf("XXCLEANUPCLEANUPCLEA   vehicles killed\n");
+	printf("XXXCLEANUPCLEANUPCLE   all vehicles killed\n");
 }
 
 int timeChange( const struct timeval startTime ) {
