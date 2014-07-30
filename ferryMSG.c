@@ -9,7 +9,7 @@
 #include <sys/msg.h>
 
 // Definitions used to control simulation termination
-#define DBG_AUTO_STOP_TIME 5000
+#define DBG_AUTO_STOP_TIME 5000000000
 #define MIN_VEHICLE_ARRIVAL_INTERVAL 100
 #define MAX_LOADS 11
 #define MAX_SPOTS_ON_FERRY 6
@@ -35,6 +35,8 @@ int queueCaptainToVehicles;
 int queueCaptainToFerry;
 // Only msgs from vehicles notifying the captain that they are waiting to board the ferry are in this queue
 int queueVehiclesToCaptain;
+// Queue to tell the other process to terminate when the current process wants to terminate  with other process 
+int queueMutualTermination;
 
 // Process IDS
 int mainProcessID;
@@ -53,14 +55,16 @@ void cleanup();
 int carProcess() {
 	int localpid = getpid();
 	setpgid(localpid, vehicleProcessGID);
-	msg.mtype = MSG_TYPE_CAR;
-	msg.pid = localpid;
+	printf("CARCAR CARCAR CARCAR   PID %d arrives at ferry dock\n", localpid);
+	msg.mtype = MSG_TYPE_CAR; msg.pid = localpid;
 	// msgsnd sends a _copy_ of the msg to the queue, so no need to instantiate additional msgs
 	// since same msg structure is used, we can use same msgSize for each msgsnd
 	// return failure code upon msgsnd failure 
 	if(msgsnd(queueVehiclesToCaptain, &msg, msgSize, 0) != 0) {
 		return -1;
 	}
+	//msgrcv..
+	printf("CARCAR CARCAR CARCAR   PID %d acks that it is a waiting vehicle\n", localpid);
 
 
 	return 0;
@@ -69,11 +73,12 @@ int carProcess() {
 int truckProcess() {
 	int localpid = getpid();
 	setpgid(localpid, vehicleProcessGID);
-	msg.mtype = MSG_TYPE_TRUCK;
-	msg.pid = localpid;
+	printf("TRUCKTRUCK TRUCKTRUC   PID %d arrives at ferry dock\n", localpid);
+	msg.mtype = MSG_TYPE_TRUCK; msg.pid = localpid;
 	if(msgsnd(queueVehiclesToCaptain, &msg, msgSize, 0) != 0) {
 		return -1;
 	}
+	printf("TRUCKTRUCK TRUCKTRUC   PID %d acks that it is a waiting vehicle\n", localpid);
 
 	return 0;
 }
@@ -98,11 +103,12 @@ int captainProcess() {
 		numberOfSpacesFilled = 0;
 		numberOfVehicles = 0;
 		
+		printf("CAPTAIN CAPTAIN CAPT   The ferry is about to load!\n");
 		// Recieve all vehicles from queue, break until queue is empty
 		// Tell these vehicles that they are in the main lane (they are waiting vehicles)
 		while(msgrcv(queueVehiclesToCaptain, &msg, msgSize, 0, IPC_NOWAIT) != -1) {
-			vehicleType = msg.mtype == MSG_TYPE_CAR ? "car" : "truck";
-			printf("CAPTAIN CAPTAIN CAPT   %s pid %d rcvd\n", vehicleType, msg.pid);
+			vehicleType = msg.mtype == MSG_TYPE_CAR ? "Car" : "Truck";
+			printf("CAPTAIN CAPTAIN CAPT   %s %d is a waiting vehicle\n", vehicleType, msg.pid);
 		}
 
 		//while(numberOfSpacesFilled < MAX_SPOTS_ON_FERRY && numberOfTrucksLoaded < MAX_SPOTS_ON_FERRY) {
@@ -112,8 +118,9 @@ int captainProcess() {
 			numberOfCarsQueued = getNumMsgTypeInQueue(queueVehiclesToCaptain, MSG_TYPE_CAR);
 			msgrcv(queueVehiclesToCaptain, &msg, msgSize, MSG_TYPE_TRUCK, IPC_NOWAIT); */
 			while(msgrcv(queueVehiclesToCaptain, &msg, msgSize, 0, IPC_NOWAIT) != -1) {
-				vehicleType = msg.mtype == MSG_TYPE_CAR ? "car" : "truck";
-				printf("CAPTAIN CAPTAIN CAPT   %s pid %d rcvd\n", vehicleType, msg.pid);
+				vehicleType = msg.mtype == MSG_TYPE_CAR ? "Car" : "Truck";
+				printf("CAPTAIN CAPTAIN CAPT   %s %d is a late vehicle\n", vehicleType, msg.pid);
+				numberOfSpacesFilled += msg.mtype == MSG_TYPE_CAR ? 1 : 2;
 			}
 
 		}
@@ -216,20 +223,22 @@ int main() {
 		scanf("%d", &maxTimeToNextVehicleArrival);
 	}
 
-	if((vehicleCreationProcessPID = fork()) == 0) {
-		return vehicleCreationProcess();
-	}
-
 	if((captainProcessPID = fork()) == 0) {
 		return captainProcess();
 	}
 
-	// Wait for vehicleCreationProcess to finish
-	waitpid(vehicleCreationProcessPID, &status, 0);
-	printf("vehicleCreationProcess returnValue: %d\n", WEXITSTATUS(status));
+	if((vehicleCreationProcessPID = fork()) == 0) {
+		return vehicleCreationProcess();
+	}
+
 	// Wait for captainProcess to finish
 	waitpid(captainProcessPID, &status, 0);
 	printf("captainProcess returnValue: %d\n", WEXITSTATUS(status));
+	// Once process captainProcess returns, the simulation should end, so send sigkill to vehicleCreationProcess
+	kill(vehicleCreationProcessPID, SIGKILL);
+	// Wait for vehicleCreationProcess to finish
+	waitpid(vehicleCreationProcessPID, &status, 0);
+	printf("vehicleCreationProcess returnValue: %d\n", WEXITSTATUS(status));
 
 	cleanup();
 
