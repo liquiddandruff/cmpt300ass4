@@ -162,33 +162,32 @@ void* createVehicle()
       /*         that it is in line */
       /* Then determine the arrival time of the next vehicle */ 
       elapsed = timeChange(startTime);
-      while(elapsed >= lastArrivalTime) {
-      printf("CREATECREATECREATECREATE      elapsed time %d arrival time %d\n", 
-		elapsed, lastArrivalTime); 
-          if(lastArrivalTime > 0 ) { 
-              isTruck = rand() % 100;
-              if(isTruck >  truckArrivalProb ) {
-                  /* This is a car */
-		    pthread_create(&(vehicleThread[threadCounter]), 
-		    NULL, car, NULL);
-		    printf("CREATECREATECREATECREATE   ");
-		    printf("   Created a car thread\n");
-              }
-              else {
-                  /* This is a truck */
-		    /*pthread_t vehicleThread;*/
-		    pthread_create(&(vehicleThread[threadCounter]), 
-		    NULL, truck, NULL);
-		    printf("CREATECREATECREATECREATE   ");
-		    printf("   Created a truck thread\n");
-              }
-		threadCounter++;
-          }
-          lastArrivalTime += rand()% maxTimeToNextArrival;
-          printf("CREATECREATECREATECREATE   ");
-	    printf("   present time %d, next arrival time %d\n",
-          elapsed, lastArrivalTime);
-      }
+	  while(elapsed >= lastArrivalTime) {
+		  printf("CREATECREATECREATECREATE      elapsed time %d arrival time %d\n", elapsed, lastArrivalTime); 
+		  if(lastArrivalTime > 0 ) { 
+			  isTruck = rand() % 100;
+			  if(isTruck >  truckArrivalProb ) {
+				  /* This is a car */
+				  pthread_create(&(vehicleThread[threadCounter]), 
+						  NULL, car, NULL);
+				  printf("CREATECREATECREATECREATE   ");
+				  printf("   Created a car thread\n");
+			  }
+			  else {
+				  /* This is a truck */
+				  /*pthread_t vehicleThread;*/
+				  pthread_create(&(vehicleThread[threadCounter]), 
+						  NULL, truck, NULL);
+				  printf("CREATECREATECREATECREATE   ");
+				  printf("   Created a truck thread\n");
+			  }
+			  threadCounter++;
+		  }
+		  lastArrivalTime += rand()% maxTimeToNextArrival;
+		  printf("CREATECREATECREATECREATE   ");
+		  printf("   present time %d, next arrival time %d\n",
+				  elapsed, lastArrivalTime);
+	  }
     }
     printf("CREATECREATECREATECREATE      EXITING FROM CREATE\n");
 }

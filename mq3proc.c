@@ -47,7 +47,7 @@ int main()
 		sleep (rand()%4);
 		while( msgrcv(qid, &buf, length, 2, IPC_NOWAIT) == -1) {
 			count++;
-			if(count%10000 == 0)printf (".", cont);
+			if(count%10000 == 0)printf ("%d", cont);
 		}
 		printf("FATHER - MESSAGE NUMBER %d: %d %ld\n", cont+1, buf.num, buf.mtype);
 	}
