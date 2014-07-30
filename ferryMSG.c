@@ -11,31 +11,41 @@
 // Definitions used to control simulation termination
 #define DBG_AUTO_STOP_TIME 5000
 #define MIN_VEHICLE_ARRIVAL_INTERVAL 100
+#define MAX_LOADS 11
+#define MAX_SPOTS_ON_FERRY 6
+#define MAX_TRUCKS_ON_FERRY 2
 
-// Definitions used for msging
+// Definitions used for msgs
 #define MSG_TYPE_CAR 1
 #define MSG_TYPE_TRUCK 2
 
 typedef struct mymsgbuf
 {
-	long mtype;
-	int num;
+	long mtype; // the type of msg
+	int data; // data pertaining to msg
+	int pid; // used as process (vehicle) identifier
 } mess_t;
 
 // We will use the same buffer format (and size) for each msg, no matter the queue 
 mess_t msg;
 int msgSize;
 
+// Queue IDS
 int queueCaptainToVehicles;
 int queueCaptainToFerry;
+// Only msgs from vehicles notifying the captain that they are waiting to board the ferry are in this queue
 int queueVehiclesToCaptain;
 
+// Process IDS
 int mainProcessID;
+int captainProcessPID;
 int vehicleCreationProcessPID;
 int vehicleProcessGID;
-int truckArrivalProb;
-int maxTimeToNextArrival;
 
+int truckArrivalProb;
+int maxTimeToNextVehicleArrival;
+
+// Forward declarations
 int timeChange( const struct timeval startTime );
 void init();
 void cleanup();
@@ -44,7 +54,10 @@ int carProcess() {
 	int localpid = getpid();
 	setpgid(localpid, vehicleProcessGID);
 	msg.mtype = MSG_TYPE_CAR;
+	msg.pid = localpid;
 	// msgsnd sends a _copy_ of the msg to the queue, so no need to instantiate additional msgs
+	// since same msg structure is used, we can use same msgSize for each msgsnd
+	// return failure code upon msgsnd failure 
 	if(msgsnd(queueVehiclesToCaptain, &msg, msgSize, 0) != 0) {
 		return -1;
 	}
@@ -57,15 +70,56 @@ int truckProcess() {
 	int localpid = getpid();
 	setpgid(localpid, vehicleProcessGID);
 	msg.mtype = MSG_TYPE_TRUCK;
+	msg.pid = localpid;
 	if(msgsnd(queueVehiclesToCaptain, &msg, msgSize, 0) != 0) {
 		return -1;
 	}
-
 
 	return 0;
 }
 
 int captainProcess() {
+	char *vehicleType = "";
+	int currentLoad = 1;
+	int numberOfCarsQueued = 0;
+	int numberOfTrucksQueued = 0;
+	int numberOfTrucksLoaded = 0;
+	int numberOfSpacesFilled = 0;
+	int numberOfSpacesEmpty = 0;
+	int numberOfVehicles = 0;
+	int counter = 0;
+
+	printf("CAPTAIN CAPTAIN CAPT   CaptainProcess created. PID is: %d\n", getpid());
+
+	while(currentLoad <= MAX_LOADS) {
+		printf("CAPTAIN CAPTAIN CAPT   load %d/%d started\n", currentLoad, MAX_LOADS);
+
+		numberOfTrucksLoaded = 0;
+		numberOfSpacesFilled = 0;
+		numberOfVehicles = 0;
+		
+		// Recieve all vehicles from queue, break until queue is empty
+		// Tell these vehicles that they are in the main lane (they are waiting vehicles)
+		while(msgrcv(queueVehiclesToCaptain, &msg, msgSize, 0, IPC_NOWAIT) != -1) {
+			vehicleType = msg.mtype == MSG_TYPE_CAR ? "car" : "truck";
+			printf("CAPTAIN CAPTAIN CAPT   %s pid %d rcvd\n", vehicleType, msg.pid);
+		}
+
+		//while(numberOfSpacesFilled < MAX_SPOTS_ON_FERRY && numberOfTrucksLoaded < MAX_SPOTS_ON_FERRY) {
+		while(numberOfSpacesFilled < MAX_SPOTS_ON_FERRY) {
+			/*
+			numberOfTrucksQueued = getNumMsgTypeInQueue(queueVehiclesToCaptain, MSG_TYPE_TRUCK);
+			numberOfCarsQueued = getNumMsgTypeInQueue(queueVehiclesToCaptain, MSG_TYPE_CAR);
+			msgrcv(queueVehiclesToCaptain, &msg, msgSize, MSG_TYPE_TRUCK, IPC_NOWAIT); */
+			while(msgrcv(queueVehiclesToCaptain, &msg, msgSize, 0, IPC_NOWAIT) != -1) {
+				vehicleType = msg.mtype == MSG_TYPE_CAR ? "car" : "truck";
+				printf("CAPTAIN CAPTAIN CAPT   %s pid %d rcvd\n", vehicleType, msg.pid);
+			}
+
+		}
+
+		currentLoad++;
+	}
 
 	return 0;
 }
@@ -73,70 +127,70 @@ int captainProcess() {
 int vehicleCreationProcess() {
 	int localpid = getpid();
 	// Time at start of process creation
-    struct timeval startTime;
+	struct timeval startTime;
 	// Time from start of process creation to current time
-    int elapsed = 0;
+	int elapsed = 0;
 	// Time at which last vehicle arrived
-    int lastArrivalTime = 0;
+	int lastArrivalTime = 0;
 
-    printf("CREATECREATECREATECR   vehicleCreationProcess created with PID: %8d \n", localpid);
-    gettimeofday(&startTime, NULL);
-    elapsed = timeChange(startTime);
-    srand (elapsed*1000+44);
+	printf("CREATE CREATE CREATE   vehicleCreationProcess created. PID is: %d \n", localpid);
+	gettimeofday(&startTime, NULL);
+	elapsed = timeChange(startTime);
+	srand (elapsed*1000+44);
 	int zombieTick = 0;
-    while(1) { 
-      /* If present time is later than arrival time of the next vehicle */
-      /*         Determine if the vehicle is a car or truck */
-      /*         Have the vehicle put a message in the queue indicating */
-      /*         that it is in line */
-      /* Then determine the arrival time of the next vehicle */ 
-	
-      elapsed = timeChange(startTime);
-	  if(elapsed >= lastArrivalTime) {
-		  printf("CREATECREATECREATECR   elapsed time %d arrival time %d\n", elapsed, lastArrivalTime); 
-		  if(lastArrivalTime > 0 ) { 
-			  if(rand() % 100 < truckArrivalProb ) {
-				  /* This is a truck */
-				  // If the fork fails for any reason, stop the simulation
-				  printf("CREATECREATECREATECR   Created a truck process\n");
-				  int childPID = fork(); 
-				  if(childPID == 0) {
-					  return truckProcess();
-				  } else if(childPID == -1) {
-					  return -1;
-				  }
-			  }
-			  else {
-				  /* This is a car */
-				  printf("CREATECREATECREATECR   Created a car process\n");
-				  int childPID = fork(); 
-				  if(childPID == 0) {
-					  return carProcess();
-				  } else if(childPID == -1) {
-					  return -1;
-				  }
-			  }
-		  }
-		  lastArrivalTime += rand()% maxTimeToNextArrival;
-		  printf("CREATECREATECREATECR   present time %d, next arrival time %d\n", elapsed, lastArrivalTime);
-	  }
+	while(1) { 
+		/* If present time is later than arrival time of the next vehicle */
+		/*         Determine if the vehicle is a car or truck */
+		/*         Have the vehicle put a message in the queue indicating */
+		/*         that it is in line */
+		/* Then determine the arrival time of the next vehicle */ 
 
-	  zombieTick++;
-	  // Purge all zombies every 10 iteratinos
-	  if(zombieTick % 10 == 0) {
-		  zombieTick -= 10;
-		  // arg1 is -1 to wait for all child processes
-		  int w = 0; int status = 0;
-		  while( (w = waitpid( -1, &status, WNOHANG)) > 1){
-			  printf("                           REAPED zombie process %d from vehicle creation process\n", w);
-		  }
-	  }
+		elapsed = timeChange(startTime);
+		if(elapsed >= lastArrivalTime) {
+			printf("CREATE CREATE CREATE   elapsed time %d arrival time %d\n", elapsed, lastArrivalTime); 
+			if(lastArrivalTime > 0 ) { 
+				if(rand() % 100 < truckArrivalProb ) {
+					/* This is a truck */
+					// If the fork fails for any reason, stop the simulation
+					printf("CREATE CREATE CREATE   Created a truck process\n");
+					int childPID = fork(); 
+					if(childPID == 0) {
+						return truckProcess();
+					} else if(childPID == -1) {
+						return -1;
+					}
+				}
+				else {
+					/* This is a car */
+					printf("CREATE CREATE CREATE   Created a car process\n");
+					int childPID = fork(); 
+					if(childPID == 0) {
+						return carProcess();
+					} else if(childPID == -1) {
+						return -1;
+					}
+				}
+			}
+			lastArrivalTime += rand()% maxTimeToNextVehicleArrival;
+			printf("CREATE CREATE CREATE   present time %d, next arrival time %d\n", elapsed, lastArrivalTime);
+		}
 
-	  if(elapsed > DBG_AUTO_STOP_TIME)
-		  break;
-    }
+		zombieTick++;
+		// Purge all zombies every 10 iteratinos
+		if(zombieTick % 10 == 0) {
+			zombieTick -= 10;
+			// arg1 is -1 to wait for all child processes
+			int w = 0; int status = 0;
+			while( (w = waitpid( -1, &status, WNOHANG)) > 1){
+				printf("                           REAPED zombie process %d from vehicle creation process\n", w);
+			}
+		}
 
-    printf("CREATECREATECREATECR   EXITING FROM CREATE\n");
+		if(elapsed > DBG_AUTO_STOP_TIME)
+			break;
+	}
+
+	printf("CREATE CREATE CREATE   vehicleCreationProcess ended\n");
 	return 0;
 }
 
@@ -144,7 +198,7 @@ int main() {
 	int status;
 	init();
 
-    printf("Please enter integer values for the following variables\n");
+	printf("Please enter integer values for the following variables\n");
 
 	// Truck probability
 	printf("Enter the percent probability that the next vehicle is a truck (0..100): ");
@@ -156,22 +210,26 @@ int main() {
 
 	// Vehicle interval
 	printf("Enter the maximum length of the interval between vehicles (%d..MAX_INT): ", MIN_VEHICLE_ARRIVAL_INTERVAL);
-	scanf("%d", &maxTimeToNextArrival);
-	while(maxTimeToNextArrival < MIN_VEHICLE_ARRIVAL_INTERVAL) {
+	scanf("%d", &maxTimeToNextVehicleArrival);
+	while(maxTimeToNextVehicleArrival < MIN_VEHICLE_ARRIVAL_INTERVAL) {
 		printf("Interval must be greater than %d: ", MIN_VEHICLE_ARRIVAL_INTERVAL);
-		scanf("%d", &maxTimeToNextArrival);
+		scanf("%d", &maxTimeToNextVehicleArrival);
 	}
 
 	if((vehicleCreationProcessPID = fork()) == 0) {
-		vehicleCreationProcess();
-		return 0;
+		return vehicleCreationProcess();
+	}
+
+	if((captainProcessPID = fork()) == 0) {
+		return captainProcess();
 	}
 
 	// Wait for vehicleCreationProcess to finish
-    printf("ret: %d\n", waitpid(vehicleCreationProcessPID, &status, 0));
-	
-
-    printf("waited\n");
+	waitpid(vehicleCreationProcessPID, &status, 0);
+	printf("vehicleCreationProcess returnValue: %d\n", WEXITSTATUS(status));
+	// Wait for captainProcess to finish
+	waitpid(captainProcessPID, &status, 0);
+	printf("captainProcess returnValue: %d\n", WEXITSTATUS(status));
 
 	cleanup();
 
@@ -204,24 +262,36 @@ void init() {
 }
 
 void cleanup() {
+	int w, status;
 	msgctl(queueCaptainToVehicles, IPC_RMID, 0);
 	msgctl(queueCaptainToFerry, IPC_RMID, 0);
 	msgctl(queueVehiclesToCaptain, IPC_RMID, 0);
 
 	if(killpg(vehicleProcessGID, SIGKILL) == -1 && errno == EPERM) {
-		printf("XXXCLEANUPCLEANUPCLE   vehicles not killed\n");
+		printf("XXXCLEANUP CLEANUPCL   vehicle processes not killed\n");
 	}
-	printf("XXXCLEANUPCLEANUPCLE   all vehicles killed\n");
+	printf("XXXCLEANUP CLEANUPCL   all vehicle processes killed\n");
+
+	while( (w = waitpid( -1, &status, WNOHANG)) > 1){
+			printf("                           REAPED process in cleanup%d\n", w);
+	}
+
+}
+
+int getNumMsgTypeInQueue(int queue_id, int msg_type) {
+	int num = 0;
+
+
+	return num;
 }
 
 int timeChange( const struct timeval startTime ) {
-    struct timeval nowTime;
-    long int elapsed;
-    int elapsedTime;
+	struct timeval nowTime;
+	long int elapsed;
+	int elapsedTime;
 
-    gettimeofday(&nowTime, NULL);
-    elapsed = (nowTime.tv_sec - startTime.tv_sec) * 1000000
-          + (nowTime.tv_usec - startTime.tv_usec);
-    elapsedTime = elapsed / 1000;
-    return elapsedTime;
+	gettimeofday(&nowTime, NULL);
+	elapsed = (nowTime.tv_sec - startTime.tv_sec) * 1000000 + (nowTime.tv_usec - startTime.tv_usec);
+	elapsedTime = elapsed / 1000;
+	return elapsedTime;
 }

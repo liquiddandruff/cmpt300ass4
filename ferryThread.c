@@ -168,16 +168,14 @@ void* createVehicle()
 			  isTruck = rand() % 100;
 			  if(isTruck >  truckArrivalProb ) {
 				  /* This is a car */
-				  pthread_create(&(vehicleThread[threadCounter]), 
-						  NULL, car, NULL);
+				  pthread_create(&(vehicleThread[threadCounter]), NULL, car, NULL);
 				  printf("CREATECREATECREATECREATE   ");
 				  printf("   Created a car thread\n");
 			  }
 			  else {
 				  /* This is a truck */
 				  /*pthread_t vehicleThread;*/
-				  pthread_create(&(vehicleThread[threadCounter]), 
-						  NULL, truck, NULL);
+				  pthread_create(&(vehicleThread[threadCounter]), NULL, truck, NULL);
 				  printf("CREATECREATECREATECREATE   ");
 				  printf("   Created a truck thread\n");
 			  }
@@ -185,8 +183,7 @@ void* createVehicle()
 		  }
 		  lastArrivalTime += rand()% maxTimeToNextArrival;
 		  printf("CREATECREATECREATECREATE   ");
-		  printf("   present time %d, next arrival time %d\n",
-				  elapsed, lastArrivalTime);
+		  printf("   present time %d, next arrival time %d\n", elapsed, lastArrivalTime);
 	  }
     }
     printf("CREATECREATECREATECREATE      EXITING FROM CREATE\n");
