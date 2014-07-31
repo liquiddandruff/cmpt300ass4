@@ -1,0 +1,1128 @@
+Script started on Wed 30 Jul 2014 09:52:29 PM PDT
+]0;steven@ansible: ~/Dropbox/school/cmpt300/ass4steven@ansible:~/Dropbox/school/cmpt300/ass4$ make
+rm ferryMSG mq3proc mqlproc ferryThread
+gcc -o ferryMSG ferryMSG.c
+gcc -o mq3proc mq3proc.c
+gcc -o mqlproc mqlproc.c
+gcc -o ferryThread ferryThread.c -lpthread
+]0;steven@ansible: ~/Dropbox/school/cmpt300/ass4steven@ansible:~/Dropbox/school/cmpt300/ass4$ ./ferryMSG 
+INITINITINITINITINIT   All queues successfully created
+Please enter integer values for the following variables
+Enter the percent probability that the next vehicle is a truck (0..100): 50
+Enter the maximum length of the interval between vehicles (100..MAX_INT): 800
+CAPTAIN CAPTAIN CAPT   CaptainProcess created. PID is: 5924
+CREATE CREATE CREATE   vehicleCreationProcess created. PID is: 5925 
+CREATE CREATE CREATE   elapsed time 0 arrival time 0
+CREATE CREATE CREATE   present time 0, next arrival time 249
+CREATE CREATE CREATE   elapsed time 249 arrival time 249
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 249, next arrival time 786
+TRUCKTRUCK TRUCKTRUC   Truck 5926 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 786 arrival time 786
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 786, next arrival time 1063
+TRUCKTRUCK TRUCKTRUC   Truck 5927 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 1/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5926 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5927 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5926 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5926 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5926 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5926 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5926 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5927 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5927 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5927 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5927 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5927 is onboard
+CREATE CREATE CREATE   elapsed time 1063 arrival time 1063
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 1063, next arrival time 1487
+TRUCKTRUCK TRUCKTRUC   Truck 5933 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5933 that it is late
+TRUCKTRUCK TRUCKTRUC   Truck 5933 acks that it is late
+CREATE CREATE CREATE   elapsed time 1487 arrival time 1487
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 1487, next arrival time 2096
+CARCAR CARCAR CARCAR   Car 5934 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5934 that it is late
+CARCAR CARCAR CARCAR   Car 5934 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5934 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5933 to leave late queue
+TRUCKTRUCK TRUCKTRUC   Truck 5926 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5926 acks Captain's signal that it has arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5926 acks Captain's signal to unload. Truck unloads from ferry and exits
+TRUCKTRUCK TRUCKTRUC   Truck 5927 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5927 acks Captain's signal that it has arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5927 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5926 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5933 acks Captain's signal and is leaving queue to be loaded onto ferry
+                           REAPED zombie process 5927 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5933 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5933 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5933 acks Captain's signal that it has arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5933 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5933 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5934 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5934 is onboard the ferry
+CREATE CREATE CREATE   elapsed time 2096 arrival time 2096
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 2096, next arrival time 2273
+CARCAR CARCAR CARCAR   Car 5935 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 2273 arrival time 2273
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 2273, next arrival time 2370
+CARCAR CARCAR CARCAR   Car 5936 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 2370 arrival time 2370
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 2370, next arrival time 2922
+TRUCKTRUCK TRUCKTRUC   Truck 5937 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 2/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5935 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5936 that it is waiting
+CARCAR CARCAR CARCAR   Car 5935 acks that it is waiting
+CARCAR CARCAR CARCAR   Car 5936 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5937 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5935 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5937 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5936 to leave waiting queue
+CARCAR CARCAR CARCAR   Car 5935 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5935 is onboard the ferry
+CARCAR CARCAR CARCAR   Car 5936 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5936 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5933 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5934 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5935 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5936 is onboard
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5937 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+TRUCKTRUCK TRUCKTRUC   Truck 5937 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5937 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+CARCAR CARCAR CARCAR   Car 5936 acks Captain's signal that it is sailing
+CARCAR CARCAR CARCAR   Car 5934 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CARCAR CARCAR CARCAR   Car 5935 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+CARCAR CARCAR CARCAR   Car 5936 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+CARCAR CARCAR CARCAR   Car 5936 acks Captain's signal to unload. Car unloads from ferry and exits.
+CARCAR CARCAR CARCAR   Car 5934 acks Captain's signal that it has arrived
+CARCAR CARCAR CARCAR   Car 5935 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+                           REAPED zombie process 5936 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5934 acks Captain's signal to unload. Car unloads from ferry and exits.
+                           REAPED zombie process 5934 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5935 acks Captain's signal to unload. Car unloads from ferry and exits.
+                           REAPED zombie process 5935 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 2922 arrival time 2922
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 2922, next arrival time 3425
+TRUCKTRUCK TRUCKTRUC   Truck 5938 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 3425 arrival time 3425
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 3425, next arrival time 4153
+TRUCKTRUCK TRUCKTRUC   Truck 5942 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 3/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5938 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5942 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5938 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5938 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5942 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5942 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5938 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5938 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5937 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5938 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5942 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5942 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5942 is onboard
+CREATE CREATE CREATE   elapsed time 4153 arrival time 4153
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 4153, next arrival time 4411
+TRUCKTRUCK TRUCKTRUC   Truck 5943 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5943 that it is late
+TRUCKTRUCK TRUCKTRUC   Truck 5943 acks that it is late
+CREATE CREATE CREATE   elapsed time 4411 arrival time 4411
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 4411, next arrival time 4684
+CARCAR CARCAR CARCAR   Car 5944 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5944 that it is late
+CARCAR CARCAR CARCAR   Car 5944 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5944 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5937 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5937 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+TRUCKTRUCK TRUCKTRUC   Truck 5937 acks Captain's signal to unload. Truck unloads from ferry and exits
+CARCAR CARCAR CARCAR   Car 5944 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5938 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5938 acks Captain's signal that it has arrived
+CARCAR CARCAR CARCAR   Car 5944 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5942 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5942 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+                           REAPED zombie process 5937 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5938 acks Captain's signal to unload. Truck unloads from ferry and exits
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5943 to leave late queue
+TRUCKTRUCK TRUCKTRUC   Truck 5943 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5943 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5942 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5938 from vehicle creation process
+                           REAPED zombie process 5942 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 4684 arrival time 4684
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 4684, next arrival time 5050
+TRUCKTRUCK TRUCKTRUC   Truck 5945 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 5050 arrival time 5050
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 5050, next arrival time 5761
+TRUCKTRUCK TRUCKTRUC   Truck 5949 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 4/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5945 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5949 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5945 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5944 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5949 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5943 is onboard
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5945 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5949 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5945 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5945 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5945 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5949 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5949 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5949 is onboard
+CREATE CREATE CREATE   elapsed time 5761 arrival time 5761
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 5761, next arrival time 6544
+CARCAR CARCAR CARCAR   Car 5950 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5950 that it is late
+CARCAR CARCAR CARCAR   Car 5950 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5950 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5945 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5945 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+TRUCKTRUCK TRUCKTRUC   Truck 5945 acks Captain's signal to unload. Truck unloads from ferry and exits
+CARCAR CARCAR CARCAR   Car 5944 acks Captain's signal that it is sailing
+CARCAR CARCAR CARCAR   Car 5944 acks Captain's signal that it has arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5943 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5943 acks Captain's signal that it has arrived
+CARCAR CARCAR CARCAR   Car 5950 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5950 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+                           REAPED zombie process 5945 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5944 acks Captain's signal to unload. Car unloads from ferry and exits.
+                           REAPED zombie process 5944 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5943 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5943 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 6544 arrival time 6544
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 6544, next arrival time 7224
+TRUCKTRUCK TRUCKTRUC   Truck 5953 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 5/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5953 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5950 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5953 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5953 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5953 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5953 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5953 is onboard
+CREATE CREATE CREATE   elapsed time 7224 arrival time 7224
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 7224, next arrival time 7912
+CARCAR CARCAR CARCAR   Car 5957 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5957 that it is late
+CARCAR CARCAR CARCAR   Car 5957 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5957 to leave late queue
+CARCAR CARCAR CARCAR   Car 5957 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5957 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5957 is onboard
+CREATE CREATE CREATE   elapsed time 7912 arrival time 7912
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 7912, next arrival time 8644
+CARCAR CARCAR CARCAR   Car 5958 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5958 that it is late
+CARCAR CARCAR CARCAR   Car 5958 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5958 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5949 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5953 acks Captain's signal that it is sailing
+CARCAR CARCAR CARCAR   Car 5950 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CARCAR CARCAR CARCAR   Car 5958 acks Captain's signal and is leaving queue to be loaded onto ferry
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+CARCAR CARCAR CARCAR   Car 5958 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5949 acks Captain's signal that it has arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5953 acks Captain's signal that it has arrived
+CARCAR CARCAR CARCAR   Car 5950 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+TRUCKTRUCK TRUCKTRUC   Truck 5949 acks Captain's signal to unload. Truck unloads from ferry and exits
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+                           REAPED zombie process 5949 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5950 acks Captain's signal to unload. Car unloads from ferry and exits.
+TRUCKTRUCK TRUCKTRUC   Truck 5953 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5953 from vehicle creation process
+                           REAPED zombie process 5950 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 8644 arrival time 8644
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 8644, next arrival time 8749
+CARCAR CARCAR CARCAR   Car 5959 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 8749 arrival time 8749
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 8749, next arrival time 9161
+TRUCKTRUCK TRUCKTRUC   Truck 5960 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 6/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5959 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5960 that it is waiting
+CARCAR CARCAR CARCAR   Car 5959 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5958 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5960 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5960 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5959 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5960 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5960 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5960 is onboard
+CARCAR CARCAR CARCAR   Car 5959 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5959 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5959 is onboard
+CREATE CREATE CREATE   elapsed time 9161 arrival time 9161
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 9161, next arrival time 9935
+CARCAR CARCAR CARCAR   Car 5964 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5964 that it is late
+CARCAR CARCAR CARCAR   Car 5964 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5964 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CARCAR CARCAR CARCAR   Car 5964 acks Captain's signal and is leaving queue to be loaded onto ferry
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+CARCAR CARCAR CARCAR   Car 5964 is onboard the ferry
+CARCAR CARCAR CARCAR   Car 5957 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5960 acks Captain's signal that it is sailing
+CARCAR CARCAR CARCAR   Car 5958 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5960 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CARCAR CARCAR CARCAR   Car 5958 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+TRUCKTRUCK TRUCKTRUC   Truck 5960 acks Captain's signal to unload. Truck unloads from ferry and exits
+CARCAR CARCAR CARCAR   Car 5957 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+CARCAR CARCAR CARCAR   Car 5957 acks Captain's signal to unload. Car unloads from ferry and exits.
+                           REAPED zombie process 5960 from vehicle creation process
+                           REAPED zombie process 5957 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5958 acks Captain's signal to unload. Car unloads from ferry and exits.
+                           REAPED zombie process 5958 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 9935 arrival time 9935
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 9935, next arrival time 9958
+TRUCKTRUCK TRUCKTRUC   Truck 5965 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 9958 arrival time 9958
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 9958, next arrival time 10706
+CARCAR CARCAR CARCAR   Car 5966 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 7/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5965 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5966 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5965 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5964 is onboard
+CARCAR CARCAR CARCAR   Car 5966 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5965 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5966 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5965 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5965 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5965 is onboard
+CARCAR CARCAR CARCAR   Car 5966 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5966 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5966 is onboard
+CREATE CREATE CREATE   elapsed time 10706 arrival time 10706
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 10706, next arrival time 11430
+TRUCKTRUCK TRUCKTRUC   Truck 5967 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5967 that it is late
+TRUCKTRUCK TRUCKTRUC   Truck 5967 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5967 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+CARCAR CARCAR CARCAR   Car 5964 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+CARCAR CARCAR CARCAR   Car 5964 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+CARCAR CARCAR CARCAR   Car 5964 acks Captain's signal to unload. Car unloads from ferry and exits.
+TRUCKTRUCK TRUCKTRUC   Truck 5965 acks Captain's signal that it is sailing
+CARCAR CARCAR CARCAR   Car 5959 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+TRUCKTRUCK TRUCKTRUC   Truck 5965 acks Captain's signal that it has arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5965 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5964 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5959 acks Captain's signal that it has arrived
+                           REAPED zombie process 5965 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5959 acks Captain's signal to unload. Car unloads from ferry and exits.
+TRUCKTRUCK TRUCKTRUC   Truck 5967 acks Captain's signal and is leaving queue to be loaded onto ferry
+                           REAPED zombie process 5959 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5967 is onboard the ferry
+CREATE CREATE CREATE   elapsed time 11430 arrival time 11430
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 11430, next arrival time 11515
+TRUCKTRUCK TRUCKTRUC   Truck 5973 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 11515 arrival time 11515
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 11515, next arrival time 11924
+CARCAR CARCAR CARCAR   Car 5974 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 8/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5973 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5973 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5974 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5973 to leave waiting queue
+CARCAR CARCAR CARCAR   Car 5974 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5974 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5967 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5973 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5973 is onboard the ferry
+CARCAR CARCAR CARCAR   Car 5974 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5974 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5973 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5974 is onboard
+CREATE CREATE CREATE   elapsed time 11924 arrival time 11924
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 11924, next arrival time 12068
+TRUCKTRUCK TRUCKTRUC   Truck 5975 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5975 that it is late
+TRUCKTRUCK TRUCKTRUC   Truck 5975 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5975 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+TRUCKTRUCK TRUCKTRUC   Truck 5975 acks Captain's signal and is leaving queue to be loaded onto ferry
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5975 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5973 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5967 acks Captain's signal that it is sailing
+CARCAR CARCAR CARCAR   Car 5966 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5967 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5973 acks Captain's signal that it has arrived
+CARCAR CARCAR CARCAR   Car 5966 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+CARCAR CARCAR CARCAR   Car 5966 acks Captain's signal to unload. Car unloads from ferry and exits.
+TRUCKTRUCK TRUCKTRUC   Truck 5973 acks Captain's signal to unload. Truck unloads from ferry and exits
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+                           REAPED zombie process 5973 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5967 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5966 from vehicle creation process
+                           REAPED zombie process 5967 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 12068 arrival time 12068
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 12068, next arrival time 12314
+TRUCKTRUCK TRUCKTRUC   Truck 5976 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 12314 arrival time 12314
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 12314, next arrival time 13094
+TRUCKTRUCK TRUCKTRUC   Truck 5977 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 9/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5976 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5976 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5977 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5976 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5977 acks that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5976 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5976 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5977 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5975 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5977 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5977 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5976 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5977 is onboard
+CREATE CREATE CREATE   elapsed time 13094 arrival time 13094
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 13094, next arrival time 13840
+TRUCKTRUCK TRUCKTRUC   Truck 5981 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5981 that it is late
+TRUCKTRUCK TRUCKTRUC   Truck 5981 acks that it is late
+CREATE CREATE CREATE   elapsed time 13840 arrival time 13840
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 13840, next arrival time 13888
+TRUCKTRUCK TRUCKTRUC   Truck 5982 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5982 that it is late
+TRUCKTRUCK TRUCKTRUC   Truck 5982 acks that it is late
+CREATE CREATE CREATE   elapsed time 13888 arrival time 13888
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 13888, next arrival time 14339
+CARCAR CARCAR CARCAR   Car 5983 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5983 that it is late
+CARCAR CARCAR CARCAR   Car 5983 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5983 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+CARCAR CARCAR CARCAR   Car 5974 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5976 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5976 acks Captain's signal that it has arrived
+CARCAR CARCAR CARCAR   Car 5983 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5975 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5975 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+CARCAR CARCAR CARCAR   Car 5983 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5976 acks Captain's signal to unload. Truck unloads from ferry and exits
+CARCAR CARCAR CARCAR   Car 5974 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+TRUCKTRUCK TRUCKTRUC   Truck 5975 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5976 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5974 acks Captain's signal to unload. Car unloads from ferry and exits.
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5981 to leave late queue
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5982 to leave late queue
+                           REAPED zombie process 5975 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5981 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5981 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5982 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5982 is onboard the ferry
+                           REAPED zombie process 5974 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 14339 arrival time 14339
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 14339, next arrival time 14838
+CARCAR CARCAR CARCAR   Car 5984 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 14838 arrival time 14838
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 14838, next arrival time 14843
+TRUCKTRUCK TRUCKTRUC   Truck 5985 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 14843 arrival time 14843
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 14843, next arrival time 15038
+CARCAR CARCAR CARCAR   Car 5986 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 10/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5984 that it is waiting
+CARCAR CARCAR CARCAR   Car 5984 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5985 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5986 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5985 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5985 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5984 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5985 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5985 is onboard the ferry
+CARCAR CARCAR CARCAR   Car 5986 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5986 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5983 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5981 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5982 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5985 is onboard
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CARCAR CARCAR CARCAR   Car 5984 acks Captain's signal and is leaving queue to be loaded onto ferry
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+CARCAR CARCAR CARCAR   Car 5984 is onboard the ferry
+CARCAR CARCAR CARCAR   Car 5986 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5986 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5981 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5981 acks Captain's signal that it has arrived
+CARCAR CARCAR CARCAR   Car 5983 acks Captain's signal that it is sailing
+CARCAR CARCAR CARCAR   Car 5983 acks Captain's signal that it has arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5977 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5977 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+TRUCKTRUCK TRUCKTRUC   Truck 5981 acks Captain's signal to unload. Truck unloads from ferry and exits
+TRUCKTRUCK TRUCKTRUC   Truck 5977 acks Captain's signal to unload. Truck unloads from ferry and exits
+CARCAR CARCAR CARCAR   Car 5983 acks Captain's signal to unload. Car unloads from ferry and exits.
+                           REAPED zombie process 5981 from vehicle creation process
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+                           REAPED zombie process 5977 from vehicle creation process
+                           REAPED zombie process 5983 from vehicle creation process
+captainProcess returnValue: 0
+vehicleCreationProcess returnValue: 0
+XXXCLEANUP CLEANUPCL   all vehicle processes killed
+]0;steven@ansible: ~/Dropbox/school/cmpt300/ass4steven@ansible:~/Dropbox/school/cmpt300/ass4$ exit
+exit
+
+Script done on Wed 30 Jul 2014 09:53:04 PM PDT
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                [62;1H[K[62;1H[?1l>[?12l[?25h[?1049l]0;steven@ansible: ~/Dropbox/school/cmpt300/ass4steven@ansible:~/Dropbox/school/cmpt300/ass4$ script sampleRunOutput1 
+Script started, file is sampleRunOutput1
+]0;steven@ansible: ~/Dropbox/school/cmpt300/ass4steven@ansible:~/Dropbox/school/cmpt300/ass4$ make
+rm ferryMSG mq3proc mqlproc ferryThread
+gcc -o ferryMSG ferryMSG.c
+gcc -o mq3proc mq3proc.c
+gcc -o mqlproc mqlproc.c
+gcc -o ferryThread ferryThread.c -lpthread
+]0;steven@ansible: ~/Dropbox/school/cmpt300/ass4steven@ansible:~/Dropbox/school/cmpt300/ass4$ ./ferryMSG 
+INITINITINITINITINIT   All queues successfully created
+Please enter integer values for the following variables
+Enter the percent probability that the next vehicle is a truck (0..100): 50
+Enter the maximum length of the interval between vehicles (100..MAX_INT): 800
+CAPTAIN CAPTAIN CAPT   CaptainProcess created. PID is: 5924
+CREATE CREATE CREATE   vehicleCreationProcess created. PID is: 5925 
+CREATE CREATE CREATE   elapsed time 0 arrival time 0
+CREATE CREATE CREATE   present time 0, next arrival time 249
+CREATE CREATE CREATE   elapsed time 249 arrival time 249
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 249, next arrival time 786
+TRUCKTRUCK TRUCKTRUC   Truck 5926 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 786 arrival time 786
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 786, next arrival time 1063
+TRUCKTRUCK TRUCKTRUC   Truck 5927 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 1/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5926 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5927 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5926 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5926 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5926 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5926 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5926 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5927 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5927 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5927 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5927 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5927 is onboard
+CREATE CREATE CREATE   elapsed time 1063 arrival time 1063
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 1063, next arrival time 1487
+TRUCKTRUCK TRUCKTRUC   Truck 5933 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5933 that it is late
+TRUCKTRUCK TRUCKTRUC   Truck 5933 acks that it is late
+CREATE CREATE CREATE   elapsed time 1487 arrival time 1487
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 1487, next arrival time 2096
+CARCAR CARCAR CARCAR   Car 5934 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5934 that it is late
+CARCAR CARCAR CARCAR   Car 5934 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5934 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5933 to leave late queue
+TRUCKTRUCK TRUCKTRUC   Truck 5926 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5926 acks Captain's signal that it has arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5926 acks Captain's signal to unload. Truck unloads from ferry and exits
+TRUCKTRUCK TRUCKTRUC   Truck 5927 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5927 acks Captain's signal that it has arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5927 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5926 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5933 acks Captain's signal and is leaving queue to be loaded onto ferry
+                           REAPED zombie process 5927 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5933 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5933 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5933 acks Captain's signal that it has arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5933 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5933 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5934 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5934 is onboard the ferry
+CREATE CREATE CREATE   elapsed time 2096 arrival time 2096
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 2096, next arrival time 2273
+CARCAR CARCAR CARCAR   Car 5935 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 2273 arrival time 2273
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 2273, next arrival time 2370
+CARCAR CARCAR CARCAR   Car 5936 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 2370 arrival time 2370
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 2370, next arrival time 2922
+TRUCKTRUCK TRUCKTRUC   Truck 5937 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 2/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5935 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5936 that it is waiting
+CARCAR CARCAR CARCAR   Car 5935 acks that it is waiting
+CARCAR CARCAR CARCAR   Car 5936 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5937 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5935 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5937 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5936 to leave waiting queue
+CARCAR CARCAR CARCAR   Car 5935 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5935 is onboard the ferry
+CARCAR CARCAR CARCAR   Car 5936 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5936 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5933 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5934 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5935 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5936 is onboard
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5937 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+TRUCKTRUCK TRUCKTRUC   Truck 5937 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5937 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+CARCAR CARCAR CARCAR   Car 5936 acks Captain's signal that it is sailing
+CARCAR CARCAR CARCAR   Car 5934 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CARCAR CARCAR CARCAR   Car 5935 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+CARCAR CARCAR CARCAR   Car 5936 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+CARCAR CARCAR CARCAR   Car 5936 acks Captain's signal to unload. Car unloads from ferry and exits.
+CARCAR CARCAR CARCAR   Car 5934 acks Captain's signal that it has arrived
+CARCAR CARCAR CARCAR   Car 5935 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+                           REAPED zombie process 5936 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5934 acks Captain's signal to unload. Car unloads from ferry and exits.
+                           REAPED zombie process 5934 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5935 acks Captain's signal to unload. Car unloads from ferry and exits.
+                           REAPED zombie process 5935 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 2922 arrival time 2922
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 2922, next arrival time 3425
+TRUCKTRUCK TRUCKTRUC   Truck 5938 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 3425 arrival time 3425
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 3425, next arrival time 4153
+TRUCKTRUCK TRUCKTRUC   Truck 5942 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 3/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5938 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5942 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5938 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5938 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5942 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5942 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5938 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5938 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5937 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5938 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5942 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5942 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5942 is onboard
+CREATE CREATE CREATE   elapsed time 4153 arrival time 4153
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 4153, next arrival time 4411
+TRUCKTRUCK TRUCKTRUC   Truck 5943 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5943 that it is late
+TRUCKTRUCK TRUCKTRUC   Truck 5943 acks that it is late
+CREATE CREATE CREATE   elapsed time 4411 arrival time 4411
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 4411, next arrival time 4684
+CARCAR CARCAR CARCAR   Car 5944 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5944 that it is late
+CARCAR CARCAR CARCAR   Car 5944 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5944 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5937 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5937 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+TRUCKTRUCK TRUCKTRUC   Truck 5937 acks Captain's signal to unload. Truck unloads from ferry and exits
+CARCAR CARCAR CARCAR   Car 5944 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5938 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5938 acks Captain's signal that it has arrived
+CARCAR CARCAR CARCAR   Car 5944 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5942 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5942 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+                           REAPED zombie process 5937 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5938 acks Captain's signal to unload. Truck unloads from ferry and exits
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5943 to leave late queue
+TRUCKTRUCK TRUCKTRUC   Truck 5943 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5943 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5942 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5938 from vehicle creation process
+                           REAPED zombie process 5942 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 4684 arrival time 4684
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 4684, next arrival time 5050
+TRUCKTRUCK TRUCKTRUC   Truck 5945 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 5050 arrival time 5050
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 5050, next arrival time 5761
+TRUCKTRUCK TRUCKTRUC   Truck 5949 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 4/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5945 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5949 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5945 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5944 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5949 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5943 is onboard
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5945 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5949 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5945 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5945 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5945 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5949 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5949 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5949 is onboard
+CREATE CREATE CREATE   elapsed time 5761 arrival time 5761
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 5761, next arrival time 6544
+CARCAR CARCAR CARCAR   Car 5950 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5950 that it is late
+CARCAR CARCAR CARCAR   Car 5950 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5950 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5945 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5945 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+TRUCKTRUCK TRUCKTRUC   Truck 5945 acks Captain's signal to unload. Truck unloads from ferry and exits
+CARCAR CARCAR CARCAR   Car 5944 acks Captain's signal that it is sailing
+CARCAR CARCAR CARCAR   Car 5944 acks Captain's signal that it has arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5943 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5943 acks Captain's signal that it has arrived
+CARCAR CARCAR CARCAR   Car 5950 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5950 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+                           REAPED zombie process 5945 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5944 acks Captain's signal to unload. Car unloads from ferry and exits.
+                           REAPED zombie process 5944 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5943 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5943 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 6544 arrival time 6544
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 6544, next arrival time 7224
+TRUCKTRUCK TRUCKTRUC   Truck 5953 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 5/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5953 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5950 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5953 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5953 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5953 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5953 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5953 is onboard
+CREATE CREATE CREATE   elapsed time 7224 arrival time 7224
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 7224, next arrival time 7912
+CARCAR CARCAR CARCAR   Car 5957 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5957 that it is late
+CARCAR CARCAR CARCAR   Car 5957 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5957 to leave late queue
+CARCAR CARCAR CARCAR   Car 5957 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5957 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5957 is onboard
+CREATE CREATE CREATE   elapsed time 7912 arrival time 7912
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 7912, next arrival time 8644
+CARCAR CARCAR CARCAR   Car 5958 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5958 that it is late
+CARCAR CARCAR CARCAR   Car 5958 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5958 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5949 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5953 acks Captain's signal that it is sailing
+CARCAR CARCAR CARCAR   Car 5950 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CARCAR CARCAR CARCAR   Car 5958 acks Captain's signal and is leaving queue to be loaded onto ferry
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+CARCAR CARCAR CARCAR   Car 5958 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5949 acks Captain's signal that it has arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5953 acks Captain's signal that it has arrived
+CARCAR CARCAR CARCAR   Car 5950 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+TRUCKTRUCK TRUCKTRUC   Truck 5949 acks Captain's signal to unload. Truck unloads from ferry and exits
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+                           REAPED zombie process 5949 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5950 acks Captain's signal to unload. Car unloads from ferry and exits.
+TRUCKTRUCK TRUCKTRUC   Truck 5953 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5953 from vehicle creation process
+                           REAPED zombie process 5950 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 8644 arrival time 8644
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 8644, next arrival time 8749
+CARCAR CARCAR CARCAR   Car 5959 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 8749 arrival time 8749
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 8749, next arrival time 9161
+TRUCKTRUCK TRUCKTRUC   Truck 5960 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 6/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5959 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5960 that it is waiting
+CARCAR CARCAR CARCAR   Car 5959 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5958 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5960 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5960 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5959 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5960 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5960 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5960 is onboard
+CARCAR CARCAR CARCAR   Car 5959 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5959 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5959 is onboard
+CREATE CREATE CREATE   elapsed time 9161 arrival time 9161
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 9161, next arrival time 9935
+CARCAR CARCAR CARCAR   Car 5964 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5964 that it is late
+CARCAR CARCAR CARCAR   Car 5964 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5964 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CARCAR CARCAR CARCAR   Car 5964 acks Captain's signal and is leaving queue to be loaded onto ferry
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+CARCAR CARCAR CARCAR   Car 5964 is onboard the ferry
+CARCAR CARCAR CARCAR   Car 5957 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5960 acks Captain's signal that it is sailing
+CARCAR CARCAR CARCAR   Car 5958 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5960 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CARCAR CARCAR CARCAR   Car 5958 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+TRUCKTRUCK TRUCKTRUC   Truck 5960 acks Captain's signal to unload. Truck unloads from ferry and exits
+CARCAR CARCAR CARCAR   Car 5957 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+CARCAR CARCAR CARCAR   Car 5957 acks Captain's signal to unload. Car unloads from ferry and exits.
+                           REAPED zombie process 5960 from vehicle creation process
+                           REAPED zombie process 5957 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5958 acks Captain's signal to unload. Car unloads from ferry and exits.
+                           REAPED zombie process 5958 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 9935 arrival time 9935
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 9935, next arrival time 9958
+TRUCKTRUCK TRUCKTRUC   Truck 5965 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 9958 arrival time 9958
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 9958, next arrival time 10706
+CARCAR CARCAR CARCAR   Car 5966 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 7/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5965 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5966 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5965 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5964 is onboard
+CARCAR CARCAR CARCAR   Car 5966 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5965 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5966 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5965 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5965 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5965 is onboard
+CARCAR CARCAR CARCAR   Car 5966 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5966 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5966 is onboard
+CREATE CREATE CREATE   elapsed time 10706 arrival time 10706
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 10706, next arrival time 11430
+TRUCKTRUCK TRUCKTRUC   Truck 5967 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5967 that it is late
+TRUCKTRUCK TRUCKTRUC   Truck 5967 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5967 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+CARCAR CARCAR CARCAR   Car 5964 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+CARCAR CARCAR CARCAR   Car 5964 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+CARCAR CARCAR CARCAR   Car 5964 acks Captain's signal to unload. Car unloads from ferry and exits.
+TRUCKTRUCK TRUCKTRUC   Truck 5965 acks Captain's signal that it is sailing
+CARCAR CARCAR CARCAR   Car 5959 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+TRUCKTRUCK TRUCKTRUC   Truck 5965 acks Captain's signal that it has arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5965 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5964 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5959 acks Captain's signal that it has arrived
+                           REAPED zombie process 5965 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5959 acks Captain's signal to unload. Car unloads from ferry and exits.
+TRUCKTRUCK TRUCKTRUC   Truck 5967 acks Captain's signal and is leaving queue to be loaded onto ferry
+                           REAPED zombie process 5959 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5967 is onboard the ferry
+CREATE CREATE CREATE   elapsed time 11430 arrival time 11430
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 11430, next arrival time 11515
+TRUCKTRUCK TRUCKTRUC   Truck 5973 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 11515 arrival time 11515
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 11515, next arrival time 11924
+CARCAR CARCAR CARCAR   Car 5974 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 8/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5973 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5973 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5974 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5973 to leave waiting queue
+CARCAR CARCAR CARCAR   Car 5974 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5974 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5967 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5973 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5973 is onboard the ferry
+CARCAR CARCAR CARCAR   Car 5974 acks Captain's signal and is leaving queue to be loaded onto ferry
+CARCAR CARCAR CARCAR   Car 5974 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5973 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Car 5974 is onboard
+CREATE CREATE CREATE   elapsed time 11924 arrival time 11924
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 11924, next arrival time 12068
+TRUCKTRUCK TRUCKTRUC   Truck 5975 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5975 that it is late
+TRUCKTRUCK TRUCKTRUC   Truck 5975 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5975 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+TRUCKTRUCK TRUCKTRUC   Truck 5975 acks Captain's signal and is leaving queue to be loaded onto ferry
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5975 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5973 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5967 acks Captain's signal that it is sailing
+CARCAR CARCAR CARCAR   Car 5966 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5967 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5973 acks Captain's signal that it has arrived
+CARCAR CARCAR CARCAR   Car 5966 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+CARCAR CARCAR CARCAR   Car 5966 acks Captain's signal to unload. Car unloads from ferry and exits.
+TRUCKTRUCK TRUCKTRUC   Truck 5973 acks Captain's signal to unload. Truck unloads from ferry and exits
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+                           REAPED zombie process 5973 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5967 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5966 from vehicle creation process
+                           REAPED zombie process 5967 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 12068 arrival time 12068
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 12068, next arrival time 12314
+TRUCKTRUCK TRUCKTRUC   Truck 5976 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 12314 arrival time 12314
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 12314, next arrival time 13094
+TRUCKTRUCK TRUCKTRUC   Truck 5977 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 9/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5976 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5976 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5977 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5976 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5977 acks that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5976 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5976 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5977 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5975 is onboard
+TRUCKTRUCK TRUCKTRUC   Truck 5977 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5977 is onboard the ferry
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5976 is onboard
+CAPTAIN CAPTAIN CAPT   Captain acks that Truck 5977 is onboard
+CREATE CREATE CREATE   elapsed time 13094 arrival time 13094
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 13094, next arrival time 13840
+TRUCKTRUCK TRUCKTRUC   Truck 5981 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5981 that it is late
+TRUCKTRUCK TRUCKTRUC   Truck 5981 acks that it is late
+CREATE CREATE CREATE   elapsed time 13840 arrival time 13840
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 13840, next arrival time 13888
+TRUCKTRUCK TRUCKTRUC   Truck 5982 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5982 that it is late
+TRUCKTRUCK TRUCKTRUC   Truck 5982 acks that it is late
+CREATE CREATE CREATE   elapsed time 13888 arrival time 13888
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 13888, next arrival time 14339
+CARCAR CARCAR CARCAR   Car 5983 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5983 that it is late
+CARCAR CARCAR CARCAR   Car 5983 acks that it is late
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5983 to leave late queue
+CAPTAIN CAPTAIN CAPT   The ferry is full!
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they are sailing
+CARCAR CARCAR CARCAR   Car 5974 acks Captain's signal that it is sailing
+TRUCKTRUCK TRUCKTRUC   Truck 5976 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they are sailing
+CAPTAIN CAPTAIN CAPT   Arrived at destination and docked
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles that they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5976 acks Captain's signal that it has arrived
+CARCAR CARCAR CARCAR   Car 5983 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5975 acks Captain's signal that it is sailing
+CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived
+TRUCKTRUCK TRUCKTRUC   Truck 5975 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload
+CARCAR CARCAR CARCAR   Car 5983 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5976 acks Captain's signal to unload. Truck unloads from ferry and exits
+CARCAR CARCAR CARCAR   Car 5974 acks Captain's signal that it has arrived
+CAPTAIN CAPTAIN CAPT   All vehicles have unloaded
+TRUCKTRUCK TRUCKTRUC   Truck 5975 acks Captain's signal to unload. Truck unloads from ferry and exits
+                           REAPED zombie process 5976 from vehicle creation process
+CARCAR CARCAR CARCAR   Car 5974 acks Captain's signal to unload. Car unloads from ferry and exits.
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5981 to leave late queue
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5982 to leave late queue
+                           REAPED zombie process 5975 from vehicle creation process
+TRUCKTRUCK TRUCKTRUC   Truck 5981 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5981 is onboard the ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5982 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5982 is onboard the ferry
+                           REAPED zombie process 5974 from vehicle creation process
+CREATE CREATE CREATE   elapsed time 14339 arrival time 14339
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 14339, next arrival time 14838
+CARCAR CARCAR CARCAR   Car 5984 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 14838 arrival time 14838
+CREATE CREATE CREATE   Created a truck process
+CREATE CREATE CREATE   present time 14838, next arrival time 14843
+TRUCKTRUCK TRUCKTRUC   Truck 5985 arrives at ferry dock
+CREATE CREATE CREATE   elapsed time 14843 arrival time 14843
+CREATE CREATE CREATE   Created a car process
+CREATE CREATE CREATE   present time 14843, next arrival time 15038
+CARCAR CARCAR CARCAR   Car 5986 arrives at ferry dock
+CAPTAIN CAPTAIN CAPT   load 10/11 started
+CAPTAIN CAPTAIN CAPT   The ferry is about to load!
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5984 that it is waiting
+CARCAR CARCAR CARCAR   Car 5984 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5985 that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5986 that it is waiting
+TRUCKTRUCK TRUCKTRUC   Truck 5985 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain tells Truck 5985 to leave waiting queue
+CAPTAIN CAPTAIN CAPT   Captain tells Car 5984 to leave waiting queue
+TRUCKTRUCK TRUCKTRUC   Truck 5985 acks Captain's signal and is leaving queue to be loaded onto ferry
+TRUCKTRUCK TRUCKTRUC   Truck 5985 is onboard the ferry
+CARCAR CARCAR CARCAR   Car 5986 acks that it is waiting
+CAPTAIN CAPTAIN CAPT   Captain te
