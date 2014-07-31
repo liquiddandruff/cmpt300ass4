@@ -177,7 +177,6 @@ int captainProcess() {
 		numberOfCarsLoaded = 0;
 		numberOfSpacesFilled = 0;
 		
-		sleep(1);
 		printf("CAPTAIN CAPTAIN CAPT   load %d/%d started\n", currentLoad, MAX_LOADS);
 		printf("CAPTAIN CAPTAIN CAPT   The ferry is about to load!\n");
 		// Receive all msgs from queue sent from vehicles, break until queue is empty
