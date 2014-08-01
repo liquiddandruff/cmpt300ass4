@@ -95,7 +95,7 @@ int carProcess() {
 		if(msg.data != MSG_SWITCH_TO_WAITING)
 			break;
 		else
-			printf("CARCAR CARCAR CARCAR   Car %d was late from last load, but won't be late on this load.\n", localpid);
+			printf("CARCAR CARCAR CARCAR   Car %d was late from last load, but won't be late this time\n", localpid);
 	}
 	printf("CARCAR CARCAR CARCAR   Car %d acks Captain's signal to leave its queue\n", localpid);
 
@@ -146,7 +146,7 @@ int truckProcess() {
 		if(msg.data != MSG_SWITCH_TO_WAITING)
 			break;
 		else
-		printf("TRUCKTRUCK TRUCKTRUC   Truck %d was late from last load, but is still here\n", localpid);
+		printf("TRUCKTRUCK TRUCKTRUC   Truck %d was late from last load, but won't be late this time\n", localpid);
 	}
 	printf("TRUCKTRUCK TRUCKTRUC   Truck %d acks Captain's signal to leave its queue\n", localpid);
 
