@@ -20,10 +20,11 @@
 #define MSG_TYPE_ONBOARD 3
 #define MSG_TYPE_TRAVELING 4
 #define MSG_TYPE_ARRIVED 5
-#define MSG_TYPE_UNLOAD 6
-#define MSG_VEHICLE_IS_WAITING 7
-#define MSG_VEHICLE_IS_LATE 8
-#define MSG_SWITCH_TO_WAITING 9
+#define MSG_TYPE_UNLOAD 9
+#define MSG_TYPE_UNLOAD_ACK 10
+#define MSG_VEHICLE_IS_WAITING 11
+#define MSG_VEHICLE_IS_LATE 12
+#define MSG_SWITCH_TO_WAITING 13
 
 #define SIZE_OF_CAR 1
 #define SIZE_OF_TRUCK 2
@@ -66,18 +67,15 @@ int carProcess() {
 	int localpid = getpid();
 	setpgid(localpid, vehicleProcessGID);
 	printf("CARCAR CARCAR CARCAR   Car %d arrives at ferry dock\n", localpid);
-	msg.mtype = MSG_TYPE_CAR; msg.pid = localpid;
-	// msgsnd sends a _copy_ of the msg to the queue, so no need to instantiate additional msgs
-	// since same msg structure is used, we can use same msgSize for each msgsnd
-	// return failure code upon msgsnd failure 
-	if(msgsnd(queueVehiclesToCaptain, &msg, msgSize, 0) == -1) { return -1; }
 
 	// Wait for signal from captain telling this vehicle that the ferry is about to load
 	// Blocks. Only looks at the mtypes concerning the PID of this process. Checks msg.data 
 	// to determine if the vehicle is waiting or late
 	while(1) {
-		printf("CARCAR CARCAR CARCAR   Car %d was late from last load, but is still here.\n", localpid);
 		msg.mtype = MSG_TYPE_CAR; msg.pid = localpid;
+		// msgsnd sends a _copy_ of the msg to the queue, so no need to instantiate additional msgs
+		// since same msg structure is used, we can use same msgSize for each msgsnd
+		// return failure code upon msgsnd failure 
 		if(msgsnd(queueVehiclesToCaptain, &msg, msgSize, 0) == -1) { return -1; }
 
 		if(msgrcv(queueCaptainToVehicles, &msg, msgSize, localpid, 0) == -1) { return -1; }
@@ -95,8 +93,10 @@ int carProcess() {
 		if(msgrcv(queueVehiclesBoarding, &msg, msgSize, localpid, 0) == -1) { return -1; }
 		if(msg.data != MSG_SWITCH_TO_WAITING)
 			break;
+		else
+			printf("CARCAR CARCAR CARCAR   Car %d was late from last load, but is still here.\n", localpid);
 	}
-	printf("CARCAR CARCAR CARCAR   Car %d acks Captain's signal and is leaving queue to be loaded onto ferry\n", localpid);
+	printf("CARCAR CARCAR CARCAR   Car %d acks Captain's signal to leave its queue\n", localpid);
 
 	printf("CARCAR CARCAR CARCAR   Car %d is onboard the ferry\n", localpid);
 	msg.mtype = MSG_TYPE_ONBOARD; msg.data = MSG_TYPE_CAR; msg.pid = localpid;
@@ -114,6 +114,11 @@ int carProcess() {
 	if(msgrcv(queueVehiclesOnboard, &msg, msgSize, MSG_TYPE_UNLOAD, 0) == -1) { return -1; }
 	printf("CARCAR CARCAR CARCAR   Car %d acks Captain's signal to unload. Car unloads from ferry and exits.\n", localpid);
 
+	// Tell Captain that this vehicle has succesfully unloaded 
+	printf("CARCAR CARCAR CARCAR   Car %d tells Captain that it has unloaded. Car exits.\n", localpid);
+	msg.mtype = MSG_TYPE_UNLOAD_ACK; msg.data = MSG_TYPE_CAR; msg.pid = localpid;
+	if(msgsnd(queueVehiclesOnboard, &msg, msgSize, 0) == -1) { return -1; }
+
 	return 0;
 }
 
@@ -121,11 +126,8 @@ int truckProcess() {
 	int localpid = getpid();
 	setpgid(localpid, vehicleProcessGID);
 	printf("TRUCKTRUCK TRUCKTRUC   Truck %d arrives at ferry dock\n", localpid);
-	msg.mtype = MSG_TYPE_TRUCK; msg.pid = localpid;
-	if(msgsnd(queueVehiclesToCaptain, &msg, msgSize, 0) == -1) { return -1; }
 	
 	while(1) {
-		printf("TRUCKTRUCK TRUCKTRUC   Truck %d was late from last load, but is still here\n", localpid);
 		msg.mtype = MSG_TYPE_TRUCK; msg.pid = localpid;
 		if(msgsnd(queueVehiclesToCaptain, &msg, msgSize, 0) == -1) { return -1; }
 
@@ -143,8 +145,10 @@ int truckProcess() {
 		if(msgrcv(queueVehiclesBoarding, &msg, msgSize, localpid, 0) == -1) { return -1; }
 		if(msg.data != MSG_SWITCH_TO_WAITING)
 			break;
+		else
+		printf("TRUCKTRUCK TRUCKTRUC   Truck %d was late from last load, but is still here\n", localpid);
 	}
-	printf("TRUCKTRUCK TRUCKTRUC   Truck %d acks Captain's signal and is leaving queue to be loaded onto ferry\n", localpid);
+	printf("TRUCKTRUCK TRUCKTRUC   Truck %d acks Captain's signal to leave its queue\n", localpid);
 
 	printf("TRUCKTRUCK TRUCKTRUC   Truck %d is onboard the ferry\n", localpid);
 	msg.mtype = MSG_TYPE_ONBOARD; msg.data = MSG_TYPE_TRUCK; msg.pid = localpid;
@@ -157,7 +161,11 @@ int truckProcess() {
 	printf("TRUCKTRUCK TRUCKTRUC   Truck %d acks Captain's signal that it has arrived\n", localpid);
 
 	if(msgrcv(queueVehiclesOnboard, &msg, msgSize, MSG_TYPE_UNLOAD, 0) == -1) { return -1; }
-	printf("TRUCKTRUCK TRUCKTRUC   Truck %d acks Captain's signal to unload. Truck unloads from ferry and exits\n", localpid);
+	printf("TRUCKTRUCK TRUCKTRUC   Truck %d acks Captain's signal to unload. Truck unloads from ferry\n", localpid);
+
+	printf("TRUCKTRUCK TRUCKTRUC   Truck %d tells Captain that it has unloaded. Truck exits.\n", localpid);
+	msg.mtype = MSG_TYPE_UNLOAD_ACK; msg.data = MSG_TYPE_TRUCK; msg.pid = localpid;
+	if(msgsnd(queueVehiclesOnboard, &msg, msgSize, 0) == -1) { return -1; }
 
 	return 0;
 }
@@ -269,12 +277,23 @@ int captainProcess() {
 				msg.mtype = MSG_TYPE_ARRIVED;
 				for(counter = 0; counter < numberOfCarsLoaded + numberOfTrucksLoaded; counter++) 
 					if(msgsnd(queueVehiclesOnboard, &msg, msgSize, 0) == -1) { return -1; }
-				printf("CAPTAIN CAPTAIN CAPT   All vehicles ack'd they have arrived\n");
 				// Unload!
 				printf("CAPTAIN CAPTAIN CAPT   Captain tells the boarded vehicles to unload\n");
 				msg.mtype = MSG_TYPE_UNLOAD;
 				for(counter = 0; counter < numberOfCarsLoaded + numberOfTrucksLoaded; counter++) 
 					if(msgsnd(queueVehiclesOnboard, &msg, msgSize, 0) == -1) { return -1; }
+				// Ack that all vehicles have unloaded
+				counter = 0;
+				printf("1 \n");
+				while(counter < numberOfCarsLoaded + numberOfTrucksLoaded) {
+					int ret = msgrcv(queueVehiclesOnboard, &msg, msgSize, MSG_TYPE_UNLOAD_ACK, IPC_NOWAIT);
+					printf("2 \n");
+					if(ret == msgSize) { 
+						vehicleType = msg.data == MSG_TYPE_CAR ? "Car" : "Truck";
+						printf("CAPTAIN CAPTAIN CAPT   Captain acks that %s %d has unloaded\n", vehicleType, msg.pid);
+						counter++;
+					} else if(ret == -1 && errno != ENOMSG) { return -1; }
+				}
 				printf("CAPTAIN CAPTAIN CAPT   All vehicles have unloaded\n");
 				// Done, but we need to move all currently late vehicles to waiting
 				while(msgrcv(queueVehiclesLate, &msg, msgSize, 0, IPC_NOWAIT) != -1) {
@@ -291,6 +310,8 @@ int captainProcess() {
 		printf("\n\n\n");
 		printf("CAPTAIN CAPTAIN CAPT   Arrived at main loading dock from destination\n");
 		currentLoad++;
+		if(currentLoad >= MAX_LOADS)
+			printf("CAPTAIN CAPTAIN CAPT   load %d/%d started. Terminating simulation!\n", currentLoad, MAX_LOADS);
 	}
 
 	return 0;
